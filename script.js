@@ -219,40 +219,20 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Wait for the DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Get all navigation links
-  const navLinks = document.querySelectorAll(".nav-links a")
+  const navLinksA = document.querySelectorAll(".nav-links a");
+  let currentPage = window.location.pathname.split("/").pop() || "index.html"; // Default to index.html if empty
 
-  // Get the current page URL
-  const currentPage = window.location.pathname
-
-  // Set active navigation link based on current page
-  const navLinksA = document.querySelectorAll(".nav-links a")
-  const currentPageA = window.location.pathname
-
-  // Remove active class from all links
   navLinksA.forEach((link) => {
-    link.classList.remove("active")
-  })
+    const linkPath = link.getAttribute("href").split("/").pop() || "index.html";
 
-  // Add active class to the link that matches the current page
-  navLinksA.forEach((link) => {
-    const linkPath = link.getAttribute("href")
+    // Remove active class from all links
+    link.classList.remove("active");
 
-    // Check if the current page includes the link's href
-    // This handles both "/contact.html" and just "contact.html" paths
-    if (currentPage.includes(linkPath) && linkPath !== "#" && linkPath !== "" && !linkPath.startsWith("#")) {
-      link.classList.add("active")
+    // Ensure correct matching for index.html
+    if (currentPage === linkPath || (currentPage === "" && linkPath === "index.html")) {
+      link.classList.add("active");
     }
-  })
-
-  // If no link was activated and we're on the home page
-  if (currentPage === "/" || currentPage.includes("index.html") || currentPage.endsWith("/")) {
-    // Find the home link and activate it
-    const homeLink = document.querySelector('.nav-links a[href="index.html"]')
-    if (homeLink) {
-      homeLink.classList.add("active")
-    }
-  }
+  });
 
   // Mobile menu toggle functionality
   const mobileMenuBtn = document.querySelector(".mobile-menu-btn")

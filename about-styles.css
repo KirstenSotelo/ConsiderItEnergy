@@ -364,7 +364,7 @@
   /* Our Values Section */
   .our-values {
     padding: var(--section-spacing) 0;
-    background-color: var(--background-alt);
+    background-color: var(--background-color);
     position: relative;
     overflow: hidden;
   }
