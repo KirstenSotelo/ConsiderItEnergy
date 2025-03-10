@@ -217,4 +217,113 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
+  // Wait for the DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Get all navigation links
+  const navLinks = document.querySelectorAll(".nav-links a")
+
+  // Get the current page URL
+  const currentPage = window.location.pathname
+
+  // Set active navigation link based on current page
+  const navLinksA = document.querySelectorAll(".nav-links a")
+  const currentPageA = window.location.pathname
+
+  // Remove active class from all links
+  navLinksA.forEach((link) => {
+    link.classList.remove("active")
+  })
+
+  // Add active class to the link that matches the current page
+  navLinksA.forEach((link) => {
+    const linkPath = link.getAttribute("href")
+
+    // Check if the current page includes the link's href
+    // This handles both "/contact.html" and just "contact.html" paths
+    if (currentPage.includes(linkPath) && linkPath !== "#" && linkPath !== "" && !linkPath.startsWith("#")) {
+      link.classList.add("active")
+    }
+  })
+
+  // If no link was activated and we're on the home page
+  if (currentPage === "/" || currentPage.includes("index.html") || currentPage.endsWith("/")) {
+    // Find the home link and activate it
+    const homeLink = document.querySelector('.nav-links a[href="index.html"]')
+    if (homeLink) {
+      homeLink.classList.add("active")
+    }
+  }
+
+  // Mobile menu toggle functionality
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn")
+  const navLinksContainer = document.querySelector(".nav-links")
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", () => {
+      navLinksContainer.classList.toggle("active")
+      // Toggle aria-expanded for accessibility
+      const expanded = navLinksContainer.classList.contains("active")
+      mobileMenuBtn.setAttribute("aria-expanded", expanded)
+    })
+  }
+})
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the modal elements
+  const modal = document.getElementById('founder-modal');
+  const closeBtn = document.querySelector('.close-btn');
+  const founderCard = document.getElementById('founder-card');
   
+  // Function to open the modal with animation
+  function openModal() {
+      modal.style.display = 'block';
+      // Force reflow before adding the class to ensure animation works
+      void modal.offsetWidth;
+      modal.classList.add('show');
+      // Prevent scrolling on the body when modal is open
+      document.body.style.overflow = 'hidden';
+  }
+  
+  // Function to close the modal with animation
+  function closeModal() {
+      modal.classList.remove('show');
+      // Wait for the animation to complete before hiding the modal
+      setTimeout(() => {
+          modal.style.display = 'none';
+          // Re-enable scrolling on the body
+          document.body.style.overflow = '';
+      }, 300); // Match this with the CSS transition time
+  }
+  
+  // Event listeners
+  founderCard.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  
+  // Close modal when clicking outside the content
+  modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+          closeModal();
+      }
+  });
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.classList.contains('show')) {
+          closeModal();
+      }
+  });
+  
+  // Add cursor pointer to founder card to indicate it's clickable
+  founderCard.style.cursor = 'pointer';
+  
+  // Add a subtle hover effect to indicate the card is clickable
+  founderCard.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.01)';
+      this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
+  });
+  
+  founderCard.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+      this.style.boxShadow = '';
+  });
+});
