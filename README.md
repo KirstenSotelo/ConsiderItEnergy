@@ -5,7 +5,7 @@
 This project is a full revamp of the **Consider It Energy** website. The redesign improves the site's aesthetics, accessibility, and performance while maintaining its core purpose. The prototype was developed using **HTML, CSS, and JavaScript**, and the final production version was deployed using the **Wix CMS**.
 
 - **Old Website**: [Consider It Energy (Legacy)](https://www.cs.torontomu.ca/~ksotelo/consideritenergy/legacy/index.html)
-- **New Website**: [Consider It Energy (Revamped)](https://www.cs.torontomu.ca/~ksotelo/consideritenergy/index.html)
+- **New Website**: [Consider It Energy (Revamped)](consideritenergy.com)
 
 ---
 
